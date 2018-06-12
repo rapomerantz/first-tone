@@ -16,12 +16,19 @@ class BasicSynth extends Component {
     }
   }
 
-  startSynth = (noteArray, noteCount) => () => {
-    console.log(noteArray);
-    const synth = new Tone.Synth(); 
-    synth.oscillator.type = 'triangle'; 
+  startSynth = (noteArray, noteCount, reverse) => () => {
 
-    
+    console.log(noteArray, reverse);
+    if (reverse) {
+      noteArray = noteArray.reverse(); 
+    }
+    else {
+      noteArray = noteArray
+    }
+    const synth = new Tone.Synth(); 
+    synth.oscillator.type = 'sine'; 
+
+
     const gain = new Tone.Gain(0.5); 
     
     var panner = new Tone.Panner(this.state.panner);
@@ -75,19 +82,23 @@ class BasicSynth extends Component {
   }
 
   whack = () => {
-    var feedbackDelay = new Tone.FeedbackDelay("8n", 0.9).toMaster();
+    var feedbackDelay = new Tone.FeedbackDelay("8n", 0.0).toMaster();
     var tom = new Tone.MembraneSynth({
-      "octaves" : 4,
-      "pitchDecay" : 0.1
+      "octaves" : 9,
+      "pitchDecay" : Math.random() * (30 - 1) + 1
     }).connect(feedbackDelay);
     tom.triggerAttackRelease("A2","32n");
   }
 
 
   render() {
+    console.log(this.synthArray);
+    
 
 
-    Tone.Transport.bpm.value = Math.random() * (120 - 119) + 116
+
+    //TEMPO SET RANDOMLY UPON RENDER between 116-120
+    Tone.Transport.bpm.value = Math.random() * (120 - 116) + 116
 
     return (
       <div className="App">
@@ -96,7 +107,8 @@ class BasicSynth extends Component {
         <pre>{JSON.stringify(this.state, null, 2)}</pre>
         
 
-      <button onClick={this.startSynth(this.state.noteArray, this.state.noteCount)}> Start</button>
+      <button onClick={this.startSynth(this.state.noteArray, this.state.noteCount, false)}> Start</button>
+      <button onClick={this.startSynth(this.state.noteArray, this.state.noteCount, true)}> Start Reverse</button>
       <button onClick={this.stopSynth}> Stop</button>
 
       <br/>
