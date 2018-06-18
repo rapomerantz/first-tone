@@ -10,7 +10,7 @@ class BasicSynth extends Component {
     this.state = {
       panner: 0,
       noteArray: [
-        'a4', 'E4', 'G4',
+        'C4', 'E4', 'G4',
         'C5', 'E5', 'G5',
       ], 
       noteCount: 3,
