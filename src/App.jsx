@@ -10,10 +10,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <BasicSynth />
-
-        <hr/>
-        {/* <StepSequencer /> */}
+        <div id="wrapper">
+          <BasicSynth />
+          {/* <hr/> */}
+          {/* <StepSequencer /> */}
+        </div>
       </div>
     );
   }
