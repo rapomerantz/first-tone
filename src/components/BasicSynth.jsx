@@ -15,7 +15,7 @@ class BasicSynth extends Component {
       ], 
       noteCount: 3,
       eigthNoteToggle: true,
-      delay: true
+      delay: false
     }
   }
 
